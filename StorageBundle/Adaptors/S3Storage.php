@@ -3,6 +3,7 @@
 namespace Bluesquare\StorageBundle\Adaptors;
 
 use Aws\S3\S3Client;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Interface de manipulation du stockage S3
@@ -18,9 +19,15 @@ class S3Storage
     protected $bucket;
     protected $region;
 
+    private $required_config_field = ['bucket', 'region', 'endpoint', 'credientials'];
+
     public function __construct ($storage_name, $config)
     {
         // TODO: on check la présence de "bucket", "region", "endpoint", "credentials" ("key", "secret") dans $config
+
+        if ($this->configIsNotNormed($config))
+            throw new Exception("Error from config file :(");
+//        if (isset($config['bucket']) && isset($config))
 
         $this->config = $config;
         $this->bucket = $config['bucket'];
@@ -34,6 +41,12 @@ class S3Storage
                 'secret' => $config['credentials']['secret']
             ]
         ]);
+    }
+
+    private function configIsNotNormed($config)
+    {
+        dump(array_diff($this->required_config_field, $config)); die;
+//        return ()
     }
 
     protected function getPrefix($prefix = null)
