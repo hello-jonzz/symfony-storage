@@ -4,4 +4,4 @@ services:
     autowire: true
     public: true
     arguments: ['user_storage']
-  Bluesquare\CryptorBundle\Cryptor: '@bluesquare.storage'
+  Bluesquare\StorageBundle\Storage: '@bluesquare.storage'
