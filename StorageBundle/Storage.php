@@ -10,6 +10,13 @@ use Aws\S3\S3Client;
  */
 class Storage
 {
+    private $user_config = [];
+
+    public function __construct($user_config)
+    {
+        $this->user_config = $user_config;
+    }
+
     public function get($storage_name)
     {
         // TODO: on récupère les infos sur ce storage dans la config utilisateur (config/bluesquare/storage.yaml)

@@ -22,6 +22,9 @@ class StorageExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
+        $definition = $container->getDefinition('bluesquare.storage');
+        $definition->setArgument('user_config', $config);
+
         return $config;
     }
 
