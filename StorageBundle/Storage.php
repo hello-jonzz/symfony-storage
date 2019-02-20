@@ -15,7 +15,6 @@ class Storage
     public function __construct(array $user_config = [])
     {
         $this->user_config = $user_config;
-        dump($this->user_config); die;
     }
 
     public function get($storage_name)
