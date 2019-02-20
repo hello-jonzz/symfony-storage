@@ -17,16 +17,12 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('storage');
-        $root->children()
-            ->arrayNode('storage_name')
-                ->useAttributeAsKey('storage_name')
-                    ->children()
-                        ->scalarNode('type')->end()
-                        ->scalarNode('bucket')->end()
-                        ->scalarNode('region')->end()
-                        ->scalarNode('endpoint')->end()
-                    ->end()
-                ->end()
+        $root->useAttributeAsKey('storage_name')
+            ->children()
+            ->scalarNode('type')->end()
+                ->scalarNode('bucket')->end()
+                ->scalarNode('region')->end()
+                ->scalarNode('endpoint')->end()
             ->end()
         ->end();
         return ($treeBuilder);
