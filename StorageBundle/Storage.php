@@ -1,6 +1,6 @@
 <?php
 
-namespace Bluesquare\StorageBundle\Adaptors;
+namespace Bluesquare\StorageBundle;
 
 use Aws\S3\S3Client;
 
