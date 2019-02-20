@@ -25,6 +25,8 @@ class S3Storage
         $this->config = $config;
         $this->bucket = $config['bucket'];
 
+        dump($this); die;
+
         $this->client = new S3Client([
             'version'  => isset($config['version']) ? $config['version'] : 'latest',
             'region'   => $config['region'],
