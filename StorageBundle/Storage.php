@@ -28,7 +28,6 @@ class Storage
             {
                 case 's3': return (new S3Storage($storage_name, $config));
             }
-
         }
 
         return (null);
