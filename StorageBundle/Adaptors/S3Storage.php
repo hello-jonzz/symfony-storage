@@ -19,8 +19,6 @@ class S3Storage
     protected $bucket;
     protected $region;
 
-    private $required_config_field = ['bucket', 'region', 'endpoint', 'credientials'];
-
     public function __construct ($storage_name, $config)
     {
         // TODO: on check la présence de "bucket", "region", "endpoint", "credentials" ("key", "secret") dans $config
