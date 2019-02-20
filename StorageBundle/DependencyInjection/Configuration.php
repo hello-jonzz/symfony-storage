@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
         $root->useAttributeAsKey('storage_name')
             ->prototype('array')
                 ->children()
-                    ->scalarNode('type')->end()
+                    ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('bucket')->end()
                     ->scalarNode('region')->end()
                     ->scalarNode('endpoint')->end()
