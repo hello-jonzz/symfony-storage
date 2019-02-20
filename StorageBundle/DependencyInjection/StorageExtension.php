@@ -22,8 +22,6 @@ class StorageExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        dump($config); die;
-
         return $config;
     }
 
