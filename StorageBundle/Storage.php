@@ -26,15 +26,15 @@ class Storage
 
 //storage:
 //photos:
-//type: s3
-//		bucket: bluesquare.public
-//    region: nl-ams
-//    endpoint: 'https://s3.nl-ams.scw.cloud'
-//    credentials:
-//      key: '%env(MYSUPERSECRETAWSKEY)%'
-//      secret: '%env(MYSUPERSECRETAWSSECRET)%'
-//    version: lastest # optionnel
-//    path: '/photos' # optionnel
+//      type: s3
+//      bucket: bluesquare.public
+//      region: nl-ams
+//      endpoint: 'https://s3.nl-ams.scw.cloud'
+//      credentials:
+//          key: '%env(MYSUPERSECRETAWSKEY)%'
+//          secret: '%env(MYSUPERSECRETAWSSECRET)%'
+//      version: lastest # optionnel
+//      path: '/photos' # optionnel
 //
 //  files:
 //    type: s3

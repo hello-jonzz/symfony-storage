@@ -16,7 +16,17 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('storage');
+        $root = $treeBuilder->root('storage');
+        $root->children()
+            ->arrayNode('storage_name')
+                ->children()
+                    ->scalarNode('type')->end()
+                ->children()
+                    ->scalarNode('bucket')->end()
+                ->children()
+                    ->scalarNode('region')->end()
+                ->children()
+                    ->scalarNode('endpoint')->end();
         return ($treeBuilder);
     }
 }
