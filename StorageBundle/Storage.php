@@ -20,14 +20,15 @@ class Storage
 
     public function get($storage_name)
     {
+        dump($this->config_storage, $storage_name); die;
         if (array_key_exists($storage_name, $this->config_storage))
         {
             $config = $this->config_storage[$storage_name];
 
             if ($config['type'] == 's3')
-                return new S3Storage($storage_name, $config);
+                return (new S3Storage($storage_name, $config));
         }
 
-        return (-2);
+        return (null);
     }
 }
