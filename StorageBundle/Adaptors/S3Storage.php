@@ -46,7 +46,7 @@ class S3Storage
     private function configIsNotNormed($config)
     {
 //        dump($config); die;
-        dump(array_diff($this->required_config_field, array_keys($config))); die;
+        dump(array_merge($this->required_config_field, array_keys($config))); die;
         return (false);
 //        return ()
     }
