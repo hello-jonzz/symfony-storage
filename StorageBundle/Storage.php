@@ -20,7 +20,7 @@ class Storage
 
     public function get($storage_name)
     {
-        dump($this->config_storage, $storage_name); die;
+        dump($this->config_storage, $storage_name, array_key_exists($storage_name, $this->config_storage)); die;
         if (array_key_exists($storage_name, $this->config_storage))
         {
             $config = $this->config_storage[$storage_name];
