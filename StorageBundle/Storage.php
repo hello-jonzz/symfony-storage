@@ -24,6 +24,8 @@ class Storage
         {
             $config = $this->config_storage[$storage_name];
 
+            dump($config); die;
+
             switch ($config['type'])
             {
                 case 's3': return (new S3Storage($storage_name, $config));
