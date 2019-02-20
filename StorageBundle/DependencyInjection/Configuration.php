@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('bucket')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('region')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('endpoint')->isRequired()->cannotBeEmpty()->end()
-                    ->arrayNode('credentials')->isRequired()->cannotBeEmpty()
+                    ->arrayNode('credentials')
                         ->children()
                             ->scalarNode('key')->isRequired()->cannotBeEmpty()->end()
                             ->scalarNode('secret')->isRequired()->cannotBeEmpty()->end()
