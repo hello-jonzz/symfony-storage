@@ -1,0 +1,22 @@
+{
+    "name": "bluesquare-packages/symfony-storage",
+    "description": "Cryptor created by Bluesquare Computing",
+    "keywords": ["template", "composer", "package"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "RENOU Maxime",
+            "email": "maxime@bluesquare.io"
+        }
+    ],
+    "type": "symfony-bundle",
+    "require": {
+		"php": ">=7.1",
+        "aws/aws-sdk-php": "^3.81"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bluesquare\\StorageBundle\\": "StorageBundle/"
+        }
+    }
+}

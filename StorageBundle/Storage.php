@@ -22,3 +22,26 @@ class Storage
         return null; // (on ajoutera d'autres types de stockage plus tard, dont le stockage de fichier sur le serveur actuel)
     }
 }
+
+//storage:
+//photos:
+//type: s3
+//		bucket: bluesquare.public
+//    region: nl-ams
+//    endpoint: 'https://s3.nl-ams.scw.cloud'
+//    credentials:
+//      key: '%env(MYSUPERSECRETAWSKEY)%'
+//      secret: '%env(MYSUPERSECRETAWSSECRET)%'
+//    version: lastest # optionnel
+//    path: '/photos' # optionnel
+//
+//  files:
+//    type: s3
+//    bucket: bluesquare.private
+//    region: nl-ams
+//    endpoint: 'https://s3.nl-ams.scw.cloud'
+//    credentials:
+//      key: '%env(MYSUPERSECRETAWSKEY)%'
+//      secret: '%env(MYSUPERSECRETAWSSECRET)%'
+//
+//  ...

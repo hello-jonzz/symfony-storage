@@ -1,0 +1,6 @@
+services:
+  bluesquare.storage:
+    class: Bluesquare\StorageBundle\Storage
+    autowire: true
+    public: true
+  Bluesquare\CryptorBundle\Cryptor: '@bluesquare.storage'
