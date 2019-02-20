@@ -12,7 +12,7 @@ class Storage
 {
     private $user_config = [];
 
-    public function __construct($user_config)
+    public function __construct($user_config = [])
     {
         $this->user_config = $user_config;
         dump($this->user_config); die;
