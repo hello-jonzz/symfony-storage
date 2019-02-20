@@ -45,10 +45,15 @@ class S3Storage
 
     private function configIsNotNormed($config)
     {
-//        dump($config); die;
-        dump(array_merge($this->required_config_field, array_keys($config))); die;
-        return (false);
-//        return ()
+        return (
+            isset($config['type']) &&
+            isset($config['bucket']) &&
+            isset($config['region']) &&
+            isset($config['endpoint']) &&
+            isset($config['credentials']) &&
+            isset($config['credentials']['key']) &&
+            isset($config['credentials']['secret'])
+        );
     }
 
     protected function getPrefix($prefix = null)
