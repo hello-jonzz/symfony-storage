@@ -21,11 +21,8 @@ class S3Storage
 
     public function __construct ($storage_name, $config)
     {
-        // TODO: on check la présence de "bucket", "region", "endpoint", "credentials" ("key", "secret") dans $config
-
-        if ($this->configIsNotNormed($config))
+        if (!($this->configIsNormed($config)))
             throw new Exception("Error from config file :(");
-//        if (isset($config['bucket']) && isset($config))
 
         $this->config = $config;
         $this->bucket = $config['bucket'];
@@ -41,7 +38,7 @@ class S3Storage
         ]);
     }
 
-    private function configIsNotNormed($config)
+    private function configIsNormed($config)
     {
         return (
             isset($config['type']) &&
