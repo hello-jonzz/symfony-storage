@@ -20,13 +20,15 @@ class Storage
 
     public function get($storage_name)
     {
-        dump($this->config_storage, $storage_name, array_key_exists($storage_name, $this->config_storage)); die;
         if (array_key_exists($storage_name, $this->config_storage))
         {
             $config = $this->config_storage[$storage_name];
 
-            if ($config['type'] == 's3')
-                return (new S3Storage($storage_name, $config));
+            switch ($config['type'])
+            {
+                case 's3': return (new S3Storage($storage_name, $config));
+            }
+
         }
 
         return (null);
