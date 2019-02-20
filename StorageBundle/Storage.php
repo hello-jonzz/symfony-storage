@@ -15,8 +15,9 @@ class Storage
         // TODO: on récupère les infos sur ce storage dans la config utilisateur (config/bluesquare/storage.yaml)
         // La clef pour la configuration d'un storage devrait être : "storage.{storage_name}"
 
+        dump($storage_name); die;
         // Si storage.{storage_name}.type == 's3' alors :
-            return new S3Storage($storage_name, $config); // $config c'est le contenu de storage.{storage_name} sous forme de tableau
+//            return new S3Storage($storage_name, $config); // $config c'est le contenu de storage.{storage_name} sous forme de tableau
 
         // Sinon :
         return null; // (on ajoutera d'autres types de stockage plus tard, dont le stockage de fichier sur le serveur actuel)

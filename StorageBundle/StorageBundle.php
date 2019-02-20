@@ -2,7 +2,7 @@
 
 namespace Bluesquare\StorageBundle;
 
-use Bluesquare\CryptorBundle\DependencyInjection\StorageExtension;
+use Bluesquare\StorageBundle\DependencyInjection\StorageExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
