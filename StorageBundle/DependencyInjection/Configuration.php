@@ -21,12 +21,12 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('storage_name')
                 ->children()
                     ->scalarNode('type')->end()
-                ->children()
                     ->scalarNode('bucket')->end()
-                ->children()
                     ->scalarNode('region')->end()
-                ->children()
-                    ->scalarNode('endpoint')->end();
+                    ->scalarNode('endpoint')->end()
+                ->end()
+            ->end()
+        ->end();
         return ($treeBuilder);
     }
 }
