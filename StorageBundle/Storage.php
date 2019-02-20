@@ -28,6 +28,6 @@ class Storage
                 return new S3Storage($storage_name, $config);
         }
 
-        return null;
+        return (-2);
     }
 }
