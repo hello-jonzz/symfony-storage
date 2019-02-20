@@ -19,11 +19,12 @@ class Configuration implements ConfigurationInterface
         $root = $treeBuilder->root('storage');
         $root->useAttributeAsKey('storage_name')
             ->prototype('array')
-            ->children()
-            ->scalarNode('type')->end()
-                ->scalarNode('bucket')->end()
-                ->scalarNode('region')->end()
-                ->scalarNode('endpoint')->end()
+                ->children()
+                ->scalarNode('type')->end()
+                    ->scalarNode('bucket')->end()
+                    ->scalarNode('region')->end()
+                    ->scalarNode('endpoint')->end()
+                ->end()
             ->end()
         ->end();
         return ($treeBuilder);
