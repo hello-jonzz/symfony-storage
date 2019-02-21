@@ -1,3 +1,6 @@
+imports:
+  - { ressource: 'config/packages/bluesquare/storage.yaml'}
+
 services:
   bluesquare.storage:
     class: Bluesquare\StorageBundle\Storage
