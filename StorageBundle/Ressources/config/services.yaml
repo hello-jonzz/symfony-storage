@@ -5,3 +5,5 @@ services:
     public: true
     arguments: ['user_storage']
   Bluesquare\StorageBundle\Storage: '@bluesquare.storage'
+  imports:
+  - { ressource: config/bluesquare/storage.yaml }
