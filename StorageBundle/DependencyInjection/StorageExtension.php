@@ -25,6 +25,8 @@ class StorageExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
+        dump(new FileLocator('/config/packages/bluesquare')); die;
+
 //        dump($sLoader, $container, $configuration, $config); die;
 
         $definition = $container->getDefinition('bluesquare.storage');
