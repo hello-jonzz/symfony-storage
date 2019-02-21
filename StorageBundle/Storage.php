@@ -23,7 +23,6 @@ class Storage
 
     public function __construct(array $user_config = [])
     {
-        dump($user_config); die;
         $this->config_storage = $user_config;
     }
 
