@@ -27,6 +27,7 @@ class S3Storage implements StorageAdaptor
 
         $this->config = $config;
         $this->bucket = $config['bucket'];
+        $this->bucket_url = $config['bucket_url'];
 
         $this->client = new S3Client([
             'version'  => isset($config['version']) ? $config['version'] : 'latest',
@@ -50,6 +51,7 @@ class S3Storage implements StorageAdaptor
         return (
             isset($config['type']) &&
             isset($config['bucket']) &&
+            isset($config['bucket_url']) &&
             isset($config['region']) &&
             isset($config['endpoint']) &&
             isset($config['credentials']) &&
@@ -86,7 +88,7 @@ class S3Storage implements StorageAdaptor
      */
     public function url ($target_path)
     {
-        return rtrim($this->config['endpoint'], '/').'/'.$this->getPrefix().ltrim($target_path, '/');
+        return rtrim($this->bucket_url, '/').'/'.$this->getPrefix().ltrim($target_path, '/');
     }
 
     /**

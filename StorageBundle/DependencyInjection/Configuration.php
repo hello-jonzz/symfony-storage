@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('bucket')->end()
+                    ->scalarNode('bucket_url')->end()
                     ->scalarNode('region')->end()
                     ->scalarNode('endpoint')->end()
                     ->arrayNode('credentials')

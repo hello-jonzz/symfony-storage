@@ -41,7 +41,7 @@ class Storage
         return (null);
     }
 
-    public function store($entity, $attribute, $file)
+    protected function getStorageAnnotation($entity, $attribute)
     {
         $reflection = new \ReflectionProperty($entity, $attribute);
         $reader = new AnnotationReader();
@@ -61,17 +61,65 @@ class Storage
             throw new MissingStorageAnnotation("Missing Storage annotation for $attribute in ".get_class($entity));
         }
 
+        return $storage_annotation;
+    }
+
+    public function getStorageFor($entity, $attribute)
+    {
+        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        return $annotation->name;
+    }
+
+    public function url($entity, $attribute)
+    {
+        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        $storage = $this->get($annotation->name);
+        $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
+        $camel = ucfirst(Container::camelize($attribute));
+        return $storage->url("$prefix{$entity->{"get".$camel}()}");
+    }
+
+    public function delete($entity, $attribute)
+    {
+        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        $storage = $this->get($annotation->name);
+        $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
+        $camel = ucfirst(Container::camelize($attribute));
+        return $storage->delete("$prefix{$entity->{"get".$camel}()}");
+    }
+
+    public function retrieve($entity, $attribute, $local_path)
+    {
+        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        $storage = $this->get($annotation->name);
+        $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
+        $camel = ucfirst(Container::camelize($attribute));
+        return $storage->retrieve("$prefix{$entity->{"get".$camel}()}", $local_path);
+    }
+
+    public function stream($entity, $attribute, $target_stream)
+    {
+        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        $storage = $this->get($annotation->name);
+        $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
+        $camel = ucfirst(Container::camelize($attribute));
+        return $storage->stream("$prefix{$entity->{"get".$camel}()}", $target_stream);
+    }
+
+    public function store($entity, $attribute, $file)
+    {
+        $storage_annotation = $this->getStorageAnnotation($entity, $attribute);
         $file_hash = hash('sha256', time().$attribute.uniqid());
         $storage = $this->get($storage_annotation->name);
 
-        if (is_null($storage_annotation))
+        if (is_null($storage))
         {
-            throw new UnknownStorage("Unknown storage for $attribute in ".get_class($entity));
+            throw new UnknownStorage("Unknown storage {$storage_annotation->name} for $attribute in ".get_class($entity));
         }
 
         $prefix = is_null($storage_annotation->prefix) || empty($storage_annotation->prefix) ? '' : trim($storage_annotation->prefix, '/').'/';
-
         $mode = $storage->mode($storage_annotation->mode);
+        $camel = ucfirst(Container::camelize($attribute));
 
         if ($file instanceof UploadedFile) {
             if (!is_null($storage_annotation->mime)) {
@@ -82,20 +130,24 @@ class Storage
                 else {
                     $valid = strtolower($storage_annotation->mime) == explode('/', $file->getMimeType())[0];
                 }
+
                 if (!$valid) {
                     throw new MimeTypeException("Invalid mime type");
                 }
             }
+
             $storage->store($file->getRealPath(), "$prefix$file_hash", $mode);
+            $previous_file_hash = $entity->{"get$camel"}();
+            if (!is_null($previous_file_hash) && !empty($previous_file_hash)) {
+                $storage->delete("$prefix$previous_file_hash");
+            }
         }
         elseif (is_string($file) && file_exists($file)) {
             $storage->store($file, "$prefix$file_hash", $mode);
         }
         else {
-            throw new InvalidFileException("Invalid file arguement");
+            throw new InvalidFileException("Invalid file argument");
         }
-
-        $camel = lcfirst(Container::camelize($attribute));
 
         $entity->{"set$camel"}($file_hash);
 
