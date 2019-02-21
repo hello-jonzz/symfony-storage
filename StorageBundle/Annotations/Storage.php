@@ -15,17 +15,17 @@ class Storage implements ORM\Annotation
     public $name;
 
     /**
-     * @var string|null
+     * @var mixed
      */
     public $prefix = null;
 
     /**
-     * @var string|null
+     * @var mixed
      */
     public $mode = null;
 
     /**
-     * @var string|null
+     * @var mixed
      */
     public $mime = null;
 }
