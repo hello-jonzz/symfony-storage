@@ -41,7 +41,8 @@ class StorageExtension extends Extension implements PrependExtensionInterface
     public function prepend(ContainerBuilder $container)
     {
         $configs = $container->getExtensionConfig($this->getAlias());
-        dump($configs); die;
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        dump($config); die;
     }
 
     public function getAlias()
