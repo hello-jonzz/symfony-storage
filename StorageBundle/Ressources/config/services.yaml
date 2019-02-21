@@ -5,3 +5,6 @@ services:
     public: true
     arguments: ['user_storage']
   Bluesquare\StorageBundle\Storage: '@bluesquare.storage'
+
+imports:
+  - { ressource: '%kernet.root_dir%/config/packages/bluesquare/storage.yaml' }
