@@ -23,6 +23,7 @@ class StorageExtension extends Extension
 //        $sLoader = new YamlFileLoader($container, new FileLocator('/config/packages/bluesquare'));
 //        $sLoader->load('storage.yaml');
         $configuration = $this->getConfiguration($configs, $container);
+        dump($configuration); die;
         $config = $this->processConfiguration($configuration, $configs);
 
 //        dump(new FileLocator('/config/packages/bluesquare')); die;
