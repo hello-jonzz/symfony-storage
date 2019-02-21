@@ -11,8 +11,6 @@ class StorageBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
-        $container->registerExtension(new StorageExtension());
     }
 
     public function getContainerExtension()
