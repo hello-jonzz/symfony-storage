@@ -3,6 +3,7 @@
 namespace Bluesquare\StorageBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -23,7 +24,7 @@ class StorageExtension extends Extension
 //        $sLoader = new YamlFileLoader($container, new FileLocator('/config/packages/bluesquare'));
 //        $sLoader->load('storage.yaml');
         $configuration = $this->getConfiguration($configs, $container);
-        dump($configuration); die;
+
         $config = $this->processConfiguration($configuration, $configs);
 
 //        dump(new FileLocator('/config/packages/bluesquare')); die;
@@ -34,6 +35,12 @@ class StorageExtension extends Extension
         $definition->setArgument(0, $config);
 
         return $config;
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        $configs = $container->getExtensionConfig($this->getAlias());
+        dump($configs); die;
     }
 
     public function getAlias()
