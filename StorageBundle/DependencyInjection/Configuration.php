@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('storage');
+        $root = $treeBuilder->root('bluesquare/storage');
         $root->useAttributeAsKey('storage_name')
             ->prototype('array')
                 ->children()
