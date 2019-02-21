@@ -22,19 +22,10 @@ class StorageExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Ressources/config'));
         $loader->load('services.yaml');
-        $loader->load('import.yaml');
-//        $sLoader = new YamlFileLoader($container, new FileLocator('/config/packages/bluesquare'));
-//        $sLoader->load('storage.yaml');
-//        dump($container->get('kernel')->getProjectDir()); die;
+
         $configuration = $this->getConfiguration($configs, $container);
 
         $config = $this->processConfiguration($configuration, $configs);
-
-        dump($config); die;
-
-//        dump(new FileLocator('/config/packages/bluesquare')); die;
-
-//        dump($sLoader, $container, $configuration, $config); die;
 
         $definition = $container->getDefinition('bluesquare.storage');
         $definition->setArgument(0, $config);
