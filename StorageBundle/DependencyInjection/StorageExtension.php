@@ -21,6 +21,7 @@ class StorageExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Ressources/config'));
         $loader->load('services.yaml');
         $configuration = $this->getConfiguration($configs, $container);
+        dump($container); die;
         $config = $this->processConfiguration($configuration, $configs);
 
         dump($config); die;
