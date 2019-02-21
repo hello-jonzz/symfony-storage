@@ -1,2 +1,2 @@
 imports:
-  - { ressource: '%kernet.root_dir%/config/packages/bluesquare/storage.yaml' }
+  - { ressource: '%kernel.root_dir%/config/packages/bluesquare/storage.yaml' }
