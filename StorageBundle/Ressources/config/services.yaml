@@ -1,6 +1,3 @@
-imports:
-  - { ressource: config/bluesquare/storage.yaml }
-
 services:
   bluesquare.storage:
     class: Bluesquare\StorageBundle\Storage
@@ -8,3 +5,5 @@ services:
     public: true
     arguments: ['user_storage']
   Bluesquare\StorageBundle\Storage: '@bluesquare.storage'
+  imports:
+  - { ressource: config/bluesquare/storage.yaml }
