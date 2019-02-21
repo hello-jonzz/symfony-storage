@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class StorageExtension extends Extension implements PrependExtensionInterface
+class StorageExtension extends Extension
 {
 
     /**
@@ -24,6 +24,7 @@ class StorageExtension extends Extension implements PrependExtensionInterface
         $loader->load('services.yaml');
 //        $sLoader = new YamlFileLoader($container, new FileLocator('/config/packages/bluesquare'));
 //        $sLoader->load('storage.yaml');
+        dump($container->get('router')->getContext()->getBaseUrl()); die;
         $configuration = $this->getConfiguration($configs, $container);
 
         $config = $this->processConfiguration($configuration, $configs);
@@ -38,12 +39,6 @@ class StorageExtension extends Extension implements PrependExtensionInterface
         return $config;
     }
 
-    public function prepend(ContainerBuilder $container)
-    {
-        $configs = $container->getExtensionConfig($this->getAlias());
-        $config = $this->processConfiguration(new Configuration(), $configs);
-        dump($config); die;
-    }
 
     public function getAlias()
     {
