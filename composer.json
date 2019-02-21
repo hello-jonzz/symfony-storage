@@ -12,7 +12,8 @@
     "type": "symfony-bundle",
     "require": {
 		"php": ">=7.1",
-        "aws/aws-sdk-php": "^3.81"
+        "aws/aws-sdk-php": "^3.81",
+        "doctrine/event-manager": "*"
     },
     "autoload": {
         "psr-4": {

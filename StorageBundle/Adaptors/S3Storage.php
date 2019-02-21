@@ -3,6 +3,7 @@
 namespace Bluesquare\StorageBundle\Adaptors;
 
 use Aws\S3\S3Client;
+use Bluesquare\StorageBundle\Exceptions\InvalidStorageConfiguration;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
@@ -10,7 +11,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  * Usage: $storage = new S3Storage('my_storage_name', $config);
  * @author Maxime Renou
  */
-class S3Storage
+class S3Storage implements StorageAdaptor
 {
     const MODE_PRIVATE = 'private';
     const MODE_PUBLIC = 'public-read';
@@ -22,7 +23,7 @@ class S3Storage
     public function __construct ($storage_name, $config)
     {
         if (!($this->configIsNormed($config)))
-            throw new Exception("Error from config file :(");
+            throw new InvalidStorageConfiguration("Invalid $storage_name storage configuration");
 
         $this->config = $config;
         $this->bucket = $config['bucket'];
@@ -36,6 +37,12 @@ class S3Storage
                 'secret' => $config['credentials']['secret']
             ]
         ]);
+    }
+
+    public function mode($name)
+    {
+        if ($name == 'public') return self::MODE_PUBLIC;
+        return self::MODE_PRIVATE;
     }
 
     private function configIsNormed($config)
