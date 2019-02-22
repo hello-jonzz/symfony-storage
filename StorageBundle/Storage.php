@@ -123,8 +123,10 @@ class Storage
         $camel = ucfirst(Container::camelize($attribute));
 
         if ($file instanceof UploadedFile) {
-            $file_hash .= strlen($file->getExtension()) ? '.'.$file->getExtension() : '';
-            if (!is_null($storage_annotation->mime)) {
+            $file_hash .= strlen($file->getClientOriginalExtension()) > 0 ? '.'.$file->getClientOriginalExtension() : '';
+
+            if (!is_null($storage_annotation->mime))
+            {
                 $valid = true;
                 if (count(explode('/', $storage_annotation->mime)) > 1) {
                     $valid = strtolower($storage_annotation->mime) == $file->getMimeType();
