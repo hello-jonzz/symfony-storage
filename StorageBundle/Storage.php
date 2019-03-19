@@ -44,9 +44,7 @@ class Storage
 
     protected function getStorageAnnotation($entity, $attribute)
     {
-        $reflectionEntity = new \ReflectionObject($entity);
-        $reflection = $reflectionEntity->getProperty($attribute);
-        $reflection->setAccessible(true);
+        $reflection = new \ReflectionProperty($entity, $attribute);
 
         $reader = new AnnotationReader();
         $annotations = $reader->getPropertyAnnotations($reflection);
@@ -74,9 +72,9 @@ class Storage
         return $annotation->name;
     }
 
-    public function url($entity, $attribute)
+    public function url($entity, $attribute, $class = null)
     {
-        $annotation = $this->getStorageAnnotation($entity, $attribute);
+        $annotation = $this->getStorageAnnotation(!is_null($class) ? $class : $entity, $attribute);
         $storage = $this->get($annotation->name);
         $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
         $camel = ucfirst(Container::camelize($attribute));
