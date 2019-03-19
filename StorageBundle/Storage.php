@@ -44,7 +44,10 @@ class Storage
 
     protected function getStorageAnnotation($entity, $attribute)
     {
-        $reflection = new \ReflectionProperty($entity, $attribute);
+        $reflectionEntity = new \ReflectionObject($entity);
+        $reflection = $reflectionEntity->getProperty($attribute);
+        $reflection->setAccessible(true);
+
         $reader = new AnnotationReader();
         $annotations = $reader->getPropertyAnnotations($reflection);
 
