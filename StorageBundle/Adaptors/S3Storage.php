@@ -129,19 +129,27 @@ class S3Storage implements StorageAdaptor
     }
 
     /**
+     * Ouvre le stream d'un fichier stocké dans S3
+     * @param $distant_path
+     * @param $target_stream
+     */
+    public function getStream ($distant_path)
+    {
+        return $this->client->getObject([
+            'Bucket' => $this->bucket,
+            'Key'    => $this->getPrefix().$distant_path,
+            'Path'   => $this->getPrefix().$distant_path,
+        ])->get('Body')->detach();
+    }
+
+    /**
      * Permet de stream un fichier stocké dans S3
      * @param $distant_path
      * @param $target_stream
      */
     public function stream ($distant_path, $target_stream)
     {
-        $aws_stream = $this->client->getObject([
-            'Bucket' => $this->bucket,
-            'Key'    => $this->getPrefix().$distant_path,
-            'Path'   => $this->getPrefix().$distant_path,
-        ])->get('Body')->detach();
-
-        stream_copy_to_stream($aws_stream, $target_stream);
+        stream_copy_to_stream($this->getStream($distant_path), $target_stream);
     }
 
     /**
