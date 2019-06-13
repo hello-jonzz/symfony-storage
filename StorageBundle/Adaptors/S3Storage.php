@@ -104,7 +104,8 @@ class S3Storage implements StorageAdaptor
             'Bucket' => $this->bucket,
             'Path'   => $this->getPrefix().$target_path,
             'Key'    => $this->getPrefix().$target_path,
-            'Body'   => file_get_contents($source_path),
+            'SourceFile' => $source_path, // Fix memory allocation
+            //'Body'   => file_get_contents($source_path),
             'ACL'    => $permissions
         ]);
     }
