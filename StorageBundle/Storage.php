@@ -99,12 +99,17 @@ class Storage
         return $storage->retrieve("$prefix{$entity->{"get".$camel}()}", $local_path);
     }
 
-    public function stream($entity, $attribute, $target_stream)
+    public function stream($entity, $attribute, $target_stream = null)
     {
         $annotation = $this->getStorageAnnotation($entity, $attribute);
         $storage = $this->get($annotation->name);
         $prefix = is_null($annotation->prefix) || empty($annotation->prefix) ? '' : trim($annotation->prefix, '/').'/';
         $camel = ucfirst(Container::camelize($attribute));
+
+        if (is_null($target_stream)) {
+            return $storage->getStream("$prefix{$entity->{"get".$camel}()}");
+        }
+
         return $storage->stream("$prefix{$entity->{"get".$camel}()}", $target_stream);
     }
 
