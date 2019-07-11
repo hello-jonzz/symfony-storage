@@ -40,6 +40,11 @@ class S3Storage implements StorageAdaptor
         ]);
     }
 
+    public function getClient()
+    {
+        return $this->client;
+    }
+
     public function mode($name)
     {
         if ($name == 'public') return self::MODE_PUBLIC;
@@ -63,8 +68,10 @@ class S3Storage implements StorageAdaptor
     protected function getPrefix($prefix = null)
     {
         $ret = '';
-        if (isset($this->config['path'])) {
+        if (isset($this->config['path']) && !empty($this->config['path']))
+        {
             $ret = trim($this->config['path'], '/').'/';
+            if (trim($ret) == '/') $ret = '';
         }
         if (!is_null($prefix)) {
             $ret = ltrim($prefix, '/');
