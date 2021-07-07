@@ -1,0 +1,7 @@
+services:
+  bluesquare.storage:
+    class: Bluesquare\StorageBundle\Storage
+    autowire: true
+    public: true
+    arguments: ['user_storage']
+  Bluesquare\StorageBundle\Storage: '@bluesquare.storage'
