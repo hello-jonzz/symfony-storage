@@ -2,6 +2,7 @@
 
 namespace Bluesquare\StorageBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -16,7 +17,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('storage');
-        $root = $treeBuilder->root('storage');
+
+        /** @var ArrayNodeDefinition $rootNode */
+        $root = method_exists(TreeBuilder::class, 'getRootNode')
+            ? $treeBuilder->getRootNode()
+            : $treeBuilder->root('storage');
+
         $root->useAttributeAsKey('storage_name')
             ->prototype('array')
                 ->children()
